@@ -38,7 +38,7 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	}
 }
 
-void AAuraEffectActor::RemoveEffectFromTarget(AActor* TargetActor)
+void AAuraEffectActor::RemoveEffectFromTarget(AActor* TargetActor, float StacksToRemove)
 {
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
 
@@ -49,7 +49,7 @@ void AAuraEffectActor::RemoveEffectFromTarget(AActor* TargetActor)
 	{
 		if(TargetASC == HandlePair.Value)
 		{
-			TargetASC->RemoveActiveGameplayEffect(HandlePair.Key);
+			TargetASC->RemoveActiveGameplayEffect(HandlePair.Key, StacksToRemove);
 			HandlesToRemove.Add(HandlePair.Key);
 		}
 	}
@@ -97,7 +97,7 @@ void AAuraEffectActor::OnEndOverlap(AActor* TargetActor)
 	
 	if(InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
 	{
-		RemoveEffectFromTarget(TargetActor);
+		RemoveEffectFromTarget(TargetActor, 1.f);
 	}
 }
 

@@ -37,7 +37,7 @@ protected:
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
 	UFUNCTION(BlueprintCallable)
-	void RemoveEffectFromTarget(AActor* TargetActor);
+	void RemoveEffectFromTarget(AActor* TargetActor, float StackToRemove);
 	
 	UFUNCTION(BlueprintCallable)
 	void OnOverlap(AActor* TargetActor);
